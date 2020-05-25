@@ -6,15 +6,15 @@ import django
 
 
 class Command(AppCommand):
-    help = 'Generates DRF API Views and Serializers for a Django app'
+    help = 'Generates Serializers, Views and Urls for a Dango DRF app from the model.'
 
     args = "[appname ...]"
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
         parser.add_argument('-f', '--format', dest='format',
-                            default='viewset',
-                            help='view format (default: viewset)'),
+                            default='generic',
+                            help='view format (default: generic)'),
 
         parser.add_argument('-d', '--depth', dest='depth', default=0,
                             help='serialization depth'),
