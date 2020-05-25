@@ -1,7 +1,7 @@
 __all__ = ['MODEL_URL', 'MODEL_VIEW']
 
 
-MODEL_URL = """from django.urls import path
+GENERIC_URL = """from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from {{ app }} import views
 
@@ -16,7 +16,7 @@ urlpatterns = format_suffix_patterns(urlpatterns)
 """
 
 
-MODEL_VIEW = """from rest_framework import generics
+GENERIC_VIEW = """from rest_framework import generics
 from {{ app }}.serializers import {{ serializers|join:', ' }}
 from {{ app }}.models import {{ models|join:', ' }}
 {% for model in models %}
