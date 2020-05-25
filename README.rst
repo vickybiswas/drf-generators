@@ -2,11 +2,9 @@
 DRF Generators
 ==============
 
-Writing APIs can be boring and repetitive work. Don't write another CRUDdy view in `Django Rest Framework <http://github.com/tomchristie/django-rest-framework>`_. With DRF Generators, one simple command will generate all of your Views, Serializers, and even Urls for your Django Rest Framework application!
+Generate all of your Views, Serializers, and even Urls for your Django Rest Framework application with one command!
 
-For a full step-by-step tutorial, check out my `blog post <http://brobin.me/blog/2015/4/13/how-to-quickly-write-an-api-in-django>`_!
-
-This is **not** intended to give you a production quality API. It was intended to jumpstart your development and save you from writing the same code over and over for each model.
+This is **ONLY** to jumpstart your development and save you from writing the same code over and over for each model. Please go through complete code and validate.
 
 ---------------
 
@@ -16,9 +14,6 @@ This is **not** intended to give you a production quality API. It was intended t
 
 * `Installation`_
 * `Usage`_
-* `Serializers`_
-* `Views`_
-* `Urls`_
 * `Tests`_
 * `License`_
 
@@ -28,17 +23,9 @@ This is **not** intended to give you a production quality API. It was intended t
 Installation
 ============
 
-Install with pip:
-
 .. code-block:: bash
 
-    $ pip install drf-generators
-
-or Clone the repo and install manually:
-
-.. code-block:: bash
-
-    $ git clone https://github.com/brobin/drf-generators.git
+    $ git clone https://github.com/vickybiswas/drf-generators.git
     $ cd drf-generators
     $ python setup.py install
 
@@ -93,158 +80,11 @@ Option                     Action
 
 -------------------
 
-===========
-Serializers
-===========
-
-Drf Generators will create ``serializers.py`` for your application. It currently uses rest framework's ``ModelSerializer`` for serialization of the models defined in ``models.py``.
-
-.. code-block:: python
-
-    class ModelSerializer(serializers.ModelSerializer):
-
-        class Meta:
-            model = User
-
-------------------
-
-=====
-Views
-=====
-
-DRF Generators will create ``views.py`` for your application. It can generate ``ViewSet``, ``APIView`` and function based views. Set the ``--format`` option when running the generator to pick the preferred style
-
--------
-ViewSet
--------
-
-``python manage.py generate api  --format viewset``
-
-.. code-block:: python
-
-    class ModelViewSet(ViewSet):
-
-        def list(self, request):
-            ...
-        def create(self, request):
-            ...
-        def retrieve(self, request, pk=None):
-            ...
-        def update(self, request, pk=None):
-            ...
-        def destroy(self, request, pk=None):
-            ...
-
--------
-APIView
--------
-
-``python manage.py generate api --format apiview``
-
-.. code-block:: python
-
-    class ModelAPIView(APIView):
-
-        def get(self, request, id, format=None):
-            ...
-        def put(self, request, id, format=None):
-            ...
-        def delete(self, request, id, format=None):
-            ...
-
-    class ModelAPIListView(APIView):
-
-        def get(self, request, format=None):
-            ...
-        def post(self, request, format=None):
-            ...
-
---------
-Function
---------
-
-``python manage.py generate api --format function``
-
-.. code-block:: python
-
-    @api_view(['GET', 'POST'])
-    def model_list(request):
-        if request.method == 'GET':
-            ...
-        elif request.method == 'POST':
-            ...
-
-    @api_view(['GET', 'PUT', 'DELETE'])
-    def model_detail(request, pk):
-        if request.method == 'GET':
-            ...
-        elif request.method == 'PUT':
-            ...
-        elif request.method == 'DELETE':
-            ...
-
--------------
-ModelViewSet
--------------
-
-``python manage.py generate api --format modelviewset``
-
-.. code-block:: python
-
-    class MyModelViewSet(ModelViewSet):
-        queryset = MyModel.objects.all()
-        serializer_class = MyModelSerializer
-
------------------
-
-====
-Urls
-====
-
-Finally, DRF Generator will create you a default ``urls.py`` to match the View format you are using.
-
-----------------------------
-ViewSet & ModeViewSet Routes
-----------------------------
-
-.. code-block:: python
-
-    router = SimpleRouter()
-
-    router.register(r'model', views.ModelViewSet, 'Model')
-
-    urlpatterns = router.urls
-
-------------
-APIView urls
-------------
-
-.. code-block:: python
-
-    url(r'^model/([0-9]+)$', views.ModelAPIView.as_view()),
-    url(r'^model', views.ModelAPIListView.as_view()),
-
--------------
-Function urls
--------------
-
-.. code-block:: python
-
-    urlpatterns = [
-
-        url(r'^model/(?P<pk>[0-9]+)$', views.model_detail),
-        url(r'^model/$', views.model_list),
-
-    ]
-
-    urlpatterns = format_suffix_patterns(urlpatterns)
-
-
 =====
 Tests
 =====
 
-A full application built with drf-generators can be found in the `tests directory <http://github.com/brobin/drf-generators/tree/master/tests>`_. Instructions on running the tests can be found in the test project's README.
+A full application built with drf-generators can be found in the `tests directory <http://github.com/vickybiswas/drf-generators/tree/master/tests>`_. Instructions on running the tests can be found in the test project's README.
 
 
 =======
@@ -253,6 +93,7 @@ License
 
 MIT License. See `LICENSE <https://github.com/brobin/drf-generators/blob/master/LICENSE>`_.
 
+This was cloned and made fit to our purpose from https://github.com/Brobin/drf-generators. 
 
 .. |python| image:: https://img.shields.io/pypi/v/drf-generators.svg?style=flat-square
     :target: https://pypi.python.org/pypi/drf-generators/
